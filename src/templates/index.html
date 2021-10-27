@@ -1,0 +1,51 @@
+<style>
+    #tabla{margin: 0 auto;font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;width: 100%;}
+#tabla td, #tabla th {border: 1px solid #ddd;padding: 8px;}
+#tabla tr:nth-child(even){background-color: #f2f2f2;}
+#tabla tr:hover {background-color: #ddd;}
+#tabla th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color:cadetblue;color: white;
+}
+.btn-ver{text-decoration: none;border: 1px solid coral; padding: 5px; border-radius: 5px;background: coral;color: white;}
+#paginacion{margin-top: 1em;float: right;}
+#paginacion a{text-decoration: none; border:1px solid cadetblue; padding: 5px;color: white;background-color: cadetblue;}
+#paginacion a:hover, .active{background-color: coral;}
+</style>
+<h1>FLASK CULTIVOS</h1>
+<div id="contenedor">
+    <table id="tabla">
+        <thead>
+            <tr><th>Usuario</th><th>Email</th><th>Cultivos</th><th>Dispositivos</th></tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{usuario.1}}</td>
+                <td>{{usuario.2}}</td>
+                <td><a href="/cultivos/{{usuario.3}}" class="btn-ver">ver</a></td>
+                <td><a href="/dispositivos/{{usuario.3}}" class="btn-ver">ver</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <nav id="paginacion">
+    {% for page in range(pages) %}
+    <a href="/page/{{page}}" class="btn-page">{{page}}</a>
+    {% endfor%}
+    </nav>
+</div>
+
+<script>
+   
+    var paginacion = document.getElementById("paginacion");
+    var btns = paginacion.getElementsByClassName("btn-page");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function() {
+      var current = document.getElementsByClassName("active");
+      if (current.length > 0) { 
+        current[0].className = current[0].className.replace(" active", "");
+      }
+      this.className += " active";
+      });
+    }
+    </script>

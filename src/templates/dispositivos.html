@@ -1,0 +1,41 @@
+
+<style>
+  #tabla{margin: 0 auto;font-family: Arial, Helvetica, sans-serif;
+border-collapse: collapse;width: 100%;}
+#tabla td, #tabla th {border: 1px solid #ddd;padding: 8px;}
+#tabla tr:nth-child(even){background-color: #f2f2f2;}
+#tabla tr:hover {background-color: #ddd;}
+#tabla th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color:cadetblue;color: white;
+}
+.btn-ver{text-decoration: none;border: 1px solid coral; padding: 5px; border-radius: 5px;background: coral;color: white;}
+#paginacion{margin-top: 1em;float: right;}
+#paginacion a{text-decoration: none; border:1px solid cadetblue; padding: 5px;color: white;background-color: cadetblue;}
+#paginacion a:hover, .active{background-color: coral;}
+#contenedor{height: 500px;overflow: auto;}
+</style>
+<h1>DISPOSITIVOS</h1>
+<a href="/">volver</a>
+<div id="contenedor">
+  <table id="tabla">
+      <thead>
+          <tr><th>Nombre</th><th>Clave</th><th>Tipo biodispositivo</th><th>Last Log</th><th>Sensor id</th><th>Tipo biodispositivo</th></tr>
+      </thead>
+      <tbody>
+          {% for dispositivo in dispositivos %}
+          <tr>
+              <td>{{dispositivo.nombre}}</td> 
+              <td>{{dispositivo.clave}}</td>
+              <td>{{dispositivo.tipo_biodispositivos_id}}</td>
+              <td>{{dispositivo.last_log['value_datetime']}}</td>
+              <td>{{dispositivo.last_log['pivot']['sensores_id']}}</td>
+              <td>{{dispositivo.device_type['nombre']}}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+<nav id="paginacion">
+  {% for page in range(pagesD) %}
+  <a href="/dispositivos/{{disp}}/page/{{page}}" class="btn-page">{{page}}</a>
+  {% endfor%}
+</nav>

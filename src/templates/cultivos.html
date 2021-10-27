@@ -1,0 +1,39 @@
+
+<style>
+    #tabla{margin: 0 auto;font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;width: 100%;}
+#tabla td, #tabla th {border: 1px solid #ddd;padding: 8px;}
+#tabla tr:nth-child(even){background-color: #f2f2f2;}
+#tabla tr:hover {background-color: #ddd;}
+#tabla th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color:cadetblue;color: white;
+}
+.btn-ver{text-decoration: none;border: 1px solid coral; padding: 5px; border-radius: 5px;background: coral;color: white;}
+#paginacion{margin-top: 1em;float: right;}
+#paginacion a{text-decoration: none; border:1px solid cadetblue; padding: 5px;color: white;background-color: cadetblue;}
+#paginacion a:hover, .active{background-color: coral;}
+</style>
+<h1>CULTIVOS</h1>
+<a href="/">Volver</a>
+<div id="contenedor">
+    <table id="tabla">
+        <thead>
+            <tr><th>Nombre</th><th>Fecha Inicio</th><th>Fecha Final</th><th>Clave Cultivo</th><th>Tipo Cultivo</th></tr>
+        </thead>
+        <tbody>
+            {% for cultivo in cultivos %}
+            <tr>
+                <td>{{cultivo.nombre}}</td>
+                <td>{{cultivo.fecha_inicio}}</td>
+                <td>{{cultivo.fecha_final}}</td>
+                <td>{{cultivo.clave_cultivo}}</td>
+                <td>{{cultivo.tipo_cultivo}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <nav id="paginacion">
+        {% for page in range(pagesC) %}
+        <a href="/cultivos/{{cultivo}}/page/{{page}}" class="btn-page">{{page}}</a>
+        {% endfor%}
+    </nav>
+</div>
